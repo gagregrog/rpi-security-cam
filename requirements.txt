@@ -1,4 +1,3 @@
-email==6.0.0a1
 imutils==0.5.2
 numpy==1.15.4
-opencv-contrib-python==3.4.4.19
+picamera==1.13

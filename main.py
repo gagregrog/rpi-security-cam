@@ -11,6 +11,6 @@ def handle_frame(frame):
 
     return frame, r > 0.99999
 
-webcam = Camera(src=0)
+webcam = Camera()
 
 webcam.start(handle_frame=handle_frame)
