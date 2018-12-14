@@ -31,7 +31,7 @@ class Detector:
 
 
     def detect(self, image):
-        faces = self.detect_people(image)
+        faces = self.detect_faces(image)
         copy = image.copy()
         Detector.draw_detections(copy, faces)
 

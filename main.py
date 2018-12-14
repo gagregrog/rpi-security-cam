@@ -7,15 +7,16 @@ from detector import Detector
 detector = Detector()
 
 def handle_frame(frame):
-    detected_image, (faces, bodies) = detector.detect(frame)
+    detected_image, faces = detector.detect(frame)
 
-    print(len(bodies))
-
-    if len(faces) + len(bodies) > 0:
+    if len(faces) > 0:
         pass 
 
     return detected_image, False
+
+# def handle_frame(frame):
+#     return frame, False
     
 
-webcam = Camera(src=0)
+webcam = Camera(src=-1)
 webcam.start(handle_frame=handle_frame)
