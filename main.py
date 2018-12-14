@@ -1,16 +1,21 @@
-from camera import Camera
-import numpy as np
 import cv2
+import numpy as np
+
+from camera import Camera
+from detector import Detector
+
+detector = Detector()
 
 def handle_frame(frame):
-    frame = frame.copy()
-    frame[0:100, 0:100] = (255, 0, 0)
-    r = np.random.random()
+    detected_image, (faces, bodies) = detector.detect(frame)
 
-    print(r)
+    print(len(bodies))
 
-    return frame, r > 0.99999
+    if len(faces) + len(bodies) > 0:
+        pass 
 
-webcam = Camera()
+    return detected_image, False
+    
 
+webcam = Camera(src=0)
 webcam.start(handle_frame=handle_frame)

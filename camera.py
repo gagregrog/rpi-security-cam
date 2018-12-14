@@ -14,7 +14,7 @@ class Camera:
 
     def start_stream(self):
         self.vs.start()
-        time.sleep(2)
+        time.sleep(3)
 
 
     def loop(self, handle_frame):
