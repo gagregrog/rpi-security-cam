@@ -226,3 +226,4 @@ pip-selfcheck.json
 .history
 
 # End of https://www.gitignore.io/api/python,pycharm,virtualenv,visualstudiocode
+photos/*
