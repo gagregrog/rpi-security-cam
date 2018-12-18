@@ -1,18 +1,32 @@
 import imutils
 import cv2
 import time
+import platform
 from imutils.video import VideoStream
 
+from utility import info
+
 class Camera:
-    def __init__(self, src=-1, name='Front Door', width=600):
+    def __init__(self, src=None, name='Front Door', width=600):
         self.src = src
         self.name = name
         self.width = width
-        options = { 'src': src } if src >= 0 else { 'usePiCamera': True }
+        options = None
+        self.pi = False
+
+        if src is not None:
+            options = { 'src': src }
+        elif platform.system() == 'Darwin':
+            options = { 'src': 0 }
+        else:
+            options = { 'usePiCamera': True }
+            self.pi = True
+
         self.vs = VideoStream(**options)
 
 
     def start_stream(self):
+        info('__START_VIDEO_STREAM__')
         self.vs.start()
         time.sleep(3)
 
@@ -20,7 +34,7 @@ class Camera:
     def loop(self, handle_frame):
         while True:
             frame = self.vs.read()
-            if self.width and self.src >= 0:
+            if self.width and not self.pi:
                 frame = imutils.resize(frame, width=self.width)
 
             frame, break_loop = handle_frame(frame)
@@ -33,6 +47,7 @@ class Camera:
 
 
     def stop_stream(self):
+        info('__STOP_VIDEO_STREAM__')
         self.vs.stop()
         cv2.destroyAllWindows()
 
@@ -41,4 +56,3 @@ class Camera:
         self.start_stream()
         self.loop(handle_frame)
         self.stop_stream()
-
