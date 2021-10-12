@@ -1,5 +1,5 @@
 imutils==0.5.2
 numpy==1.15.4
 # picamera==1.13
-opencv-contrib-python==3.4.4.19
+opencv-contrib-python==4.2.0.32
 python-dotenv==0.10.1
